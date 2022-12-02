@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Giphy Caller</title>
+</head>
+<body>
+    <div class="image">
+        <img src="#">
+    </div>
+    
+    <br />
+    <div class="controls">
+        <button>Push Me</button>
+    
+    <br />
+
+    <input type = 'text' placeholder="enter a search term">
+
+    </div>
+    
+    <script>
+        btn = document.querySelector('button');
+        input = document.querySelector('input')
+        btn.addEventListener('click', newImg);
+        const img = document.querySelector('img');
+        function newImg(){ 
+            if (input.value === "") {
+                apiCall('cats');
+               
+                } else {
+                    apiCall(input.value)
+                }
+    };
+
+    function apiCall(keyword) {
+        let url = 'https://api.giphy.com/v1/gifs/translate?api_key=w4zARZcpXJ8yOF5o2hQvh2aOYzlRGazh&s=' + keyword;
+        fetch(url,
+                    {mode: 'cors'})
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(response) {
+                        img.src=response.data.images.original.url;
+                    });
+    }
+    </script>
+</body>
+</html>
